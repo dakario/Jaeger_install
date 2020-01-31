@@ -1,8 +1,8 @@
-* Jeager Install
+# Jeager Install
 
 We will install all the componants using operators. So we will first install the operators and the CRD before customing and deploying every single componant.
 
-** Install Elasticsearch
+## Install Elasticsearch
 
 For Elasticsearch, we will install the operator, the CRD and the RABC by running the following command:
 
@@ -16,7 +16,7 @@ Now we will create an Elasticsearch with 6 nodes (3) Master nodes and 3 Data nod
 Kubectl apply -f elasticsearch/elastic.yaml
 ```
 
-** Install Kafka
+## Install Kafka
 
 We start installing kafka by creating a dedicated namespace:
 
@@ -39,7 +39,7 @@ Kubectl apply -f kafka/kafka.yaml
 ```
 ***Notice: Be sure, by viewing the log, that kafka and the elasticsearch cluster are UP & Running before starting the Jaeger installation*** 
 
-** Install Jaeger
+## Install Jaeger
 
 First we will install the operator and the CRD in the ***observability*** namespace by running :
 
