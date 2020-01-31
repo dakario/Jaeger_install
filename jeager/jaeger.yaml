@@ -1,0 +1,65 @@
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  labels:
+    jaegertracing.io/operated-by: observability.jaeger-operator
+  name: simple-prod
+  namespace: observability
+spec:
+  agent:
+    options: {}
+    resources: {}
+    strategy: DaemonSet
+  collector:
+    options:
+      kafka:
+        producer:
+          brokers: my-cluster-kafka-brokers.kafka.svc.cluster.local:9092
+          topic: jaeger-spans
+    replicas: 2
+    resources: {}
+  ingester:
+    options:
+      kafka:
+        consumer:
+          brokers: my-cluster-kafka-brokers.kafka.svc.cluster.local:9092
+          topic: jaeger-spans
+    replicas: 2
+    resources: {}
+  ingress:
+    openshift: {}
+    resources: {}
+  query:
+    options: {}
+    resources: {}
+  resources: {}
+  sampling:
+    options: {}
+  storage:
+    esIndexCleaner:
+      enabled: true
+      numberOfDays: 3
+      resources: {}
+      schedule: 55 23 * * *
+    esRollover:
+      resources: {}
+    options:
+      es:
+        num-replicas: 2
+        num-shards: 1
+        server-urls: https://quickstart-es-http:9200
+        tls:
+          ca: /es/certificates/ca.crt
+    secretName: jaeger-secret
+    type: elasticsearch
+  strategy: streaming
+  ui:
+    options: {}
+  volumeMounts:
+  - mountPath: /es/certificates/
+    name: certificates
+    readOnly: true
+  volumes:
+  - name: certificates
+    secret:
+      secretName: quickstart-es-http-certs-public
