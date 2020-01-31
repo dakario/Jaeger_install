@@ -13,6 +13,7 @@ kubectl apply -f https://download.elastic.co/downloads/eck/1.0.0/all-in-one.yaml
 Now we will create an Elasticsearch with 6 nodes (3) Master nodes and 3 Data nodes:
 
 ```
+kubectl create namespace observability
 Kubectl apply -f elasticsearch/elastic.yaml
 ```
 
@@ -44,7 +45,6 @@ Kubectl apply -f kafka/kafka.yaml
 First we will install the operator and the CRD in the ***observability*** namespace by running :
 
 ```
-kubectl create namespace observability
 kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/crds/jaegertracing.io_jaegers_crd.yaml
 kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/service_account.yaml
 kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/role.yaml
