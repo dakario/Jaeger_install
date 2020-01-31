@@ -1,10 +1,10 @@
 # Jaeger Install
 
-We will install all the componants using operators. So we will first install the operators and the CRD before customing and deploying every single componant.
+ We will at first install the operators and the CRD before customing and deploying every single component.
 
 ## Install Elasticsearch
 
-For Elasticsearch, we will install the operator, the CRD and the RABC by running the following command:
+For Elasticsearch, we will install the operator, the CRD and the RABC by running the following commands:
 
 ```
 kubectl apply -f https://download.elastic.co/downloads/eck/1.0.0/all-in-one.yaml
@@ -19,7 +19,7 @@ Kubectl apply -f elasticsearch/elastic.yaml
 
 ## Install Kafka
 
-We start installing kafka by creating a dedicated namespace:
+Now we can start installing kafka by creating a dedicated namespace:
 
 ```
 kubectl create namespace kafka
@@ -38,7 +38,7 @@ Once the operator and CRD created, we will create the kafka custom ressource :
 ```
 Kubectl apply -f kafka/kafka.yaml
 ```
-***Notice: Be sure, by viewing the log, that kafka and the elasticsearch cluster are UP & Running before starting the Jaeger installation*** 
+***Notice: Be sure, by checking the logs, that kafka and the elasticsearch cluster are UP & Running before starting the Jaeger installation with the next steps*** 
 
 ## Install Jaeger
 
