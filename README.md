@@ -1,4 +1,4 @@
-# Jeager Install
+# Jaeger Install
 
 We will install all the componants using operators. So we will first install the operators and the CRD before customing and deploying every single componant.
 
