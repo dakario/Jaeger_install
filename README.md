@@ -42,7 +42,7 @@ Kubectl apply -f kafka/kafka.yaml
 
 ## Install Jaeger
 
-First we will install the operator and the CRD in the ***observability*** namespace by running :
+First we will install the operator and the CRD by running :
 
 ```
 kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/crds/jaegertracing.io_jaegers_crd.yaml
