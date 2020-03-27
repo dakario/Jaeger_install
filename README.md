@@ -55,7 +55,7 @@ kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operato
 Before deploying Jaeger we have to get the password from Elasticsearch secret and create a new secret for Jaeger with username and password.
 
 ```
-PASSWORD=$(kubectl get secret quickstart-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 --decode)
+PASSWORD=$(kubectl get secret quickstart-es-elastic-user -n observability -o=jsonpath='{.data.elastic}' | base64 --decode)
 
 kubectl create secret generic jaeger-secret --from-literal=ES_PASSWORD=${PASSWORD} --from-literal=ES_USERNAME=elastic
 ```
