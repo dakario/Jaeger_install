@@ -42,14 +42,14 @@ Kubectl apply -f kafka/kafka.yaml
 
 ## Install Jaeger
 
-First we will install the operator and the CRD by running :
+First we will install the operator and the CRD in the ***observability*** namespace by running :
 
 ```
-kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/crds/jaegertracing.io_jaegers_crd.yaml
-kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/service_account.yaml
-kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/role.yaml
-kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/role_binding.yaml
-kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/operator.yaml
+kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/crds/jaegertracing.io_jaegers_crd.yaml -n observability
+kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/service_account.yaml -n observability
+kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/role.yaml -n observability
+kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/role_binding.yaml -n observability
+kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/operator.yaml -n observability
 ```
 
 Before deploying Jaeger we have to get the password from Elasticsearch secret and create a new secret for Jaeger with username and password.
@@ -57,7 +57,7 @@ Before deploying Jaeger we have to get the password from Elasticsearch secret an
 ```
 PASSWORD=$(kubectl get secret quickstart-es-elastic-user -n observability -o=jsonpath='{.data.elastic}' | base64 --decode)
 
-kubectl create secret generic jaeger-secret --from-literal=ES_PASSWORD=${PASSWORD} --from-literal=ES_USERNAME=elastic
+kubectl create secret generic jaeger-secret -n observability --from-literal=ES_PASSWORD=${PASSWORD} --from-literal=ES_USERNAME=elastic
 ```
 
 Now we can deploy Jaeger :
